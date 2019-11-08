@@ -10,4 +10,4 @@ module.exports = data => {
     colors[colorNumber] = rgb;
   }
   return colors;
-}
+};
