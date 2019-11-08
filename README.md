@@ -18,7 +18,7 @@ Options:
 
 ## Parsers and generators
 
-See `parsers/` and `generators/` for a list. Contributions welcome.
+See `parse/` and `generate/` for a list. Contributions welcome.
 
 ## License
 
