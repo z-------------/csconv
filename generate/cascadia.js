@@ -28,9 +28,8 @@ const map = {
 module.exports = colors => {
   const obj = { name: SCHEMENAME };
   for (let i = 0, l = colors.length; i < l; ++i) {
-    const key = map[i];
-    if (!key) continue;
-    obj[key] = rgbToHex(colors[i]);
+    if (!map[i]) continue;
+    obj[map[i]] = rgbToHex(colors[i]);
   }
   return JSON.stringify(obj, null, 2);
 };
