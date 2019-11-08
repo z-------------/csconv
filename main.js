@@ -17,6 +17,13 @@ const fileExistsInDir = (dirPath, filename) => {
 };
 
 /**
+ * @param {string[]} filenames
+ */
+const formatComponentsList = filenames => {
+  return filenames.filter(filename => filename.endsWith(".js")).map(filename => filename.slice(0, -3)).join(", ");
+};
+
+/**
  * Write to stderr and exit(1) if condition is not truthy.
  * @param {*} condition 
  * @param {string=} message 
@@ -28,7 +35,32 @@ const enforce = (condition, message) => {
   }
 }
 
+const hasFlag = flag => {
+  const short = (flag.length === 1);
+  for (let arg of process.argv) {
+    if (arg === "--" + flag || short && arg === "-" + flag) return true;
+  }
+  return false;
+};
+
 (async () => {
+  if (hasFlag("h") || hasFlag("help")) {
+    process.stdout.write(
+`Usage: csconv <filename> <parsername> <generatorname>
+
+Options:
+-l, --list\tList parsers and generators and exit.
+-h, --help\tShow this help and exit.\n`);
+    process.exit(0);
+  }
+
+  if (hasFlag("l") || hasFlag("list")) {
+    const parsersStr = formatComponentsList(fs.readdirSync(PARSERS_PATH));
+    const generatorsStr = formatComponentsList(fs.readdirSync(GENERATORS_PATH));
+    process.stdout.write(`Parsers:\t${parsersStr}\nGenerators:\t${generatorsStr}\n`);
+    process.exit(0);
+  }
+
   const filename = process.argv[2];
   enforce(filename, "No input file specified");
 
