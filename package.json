@@ -1,7 +1,11 @@
 {
   "name": "csconv",
   "version": "0.0.0",
-  "main": "index.js",
+  "main": "main.js",
+  "bin": {
+    "csconv": "./main.js"
+  },
+  "preferGlobal": true,
   "repository": "https://github.com/z-------------/csconv.git",
   "author": "Zack Guard <zacharyguard@gmail.com>",
   "license": "MIT",
