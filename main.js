@@ -42,7 +42,7 @@ const enforce = (condition, message) => {
 
   let data;
   try {
-    data = await promisify(fs.readFile)(path.resolve(__dirname, filename), { encoding: "utf-8" });
+    data = await promisify(fs.readFile)(path.resolve(process.cwd(), filename), { encoding: "utf-8" });
   } catch (err) {
     enforce(false, `Failed to read '${filename}'`);
   }
